@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Doanh thu";
+}
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+
+            <h2>Thống kê doanh thu</h2>
+
+        </div>
+
+        <div class="card-body text-center">
+
+            <h4>Tổng doanh thu</h4>
+
+            <h1 class="text-danger">
+
+                @String.Format("{0:N0}", ViewBag.DoanhThu)
+
+                VNĐ
+
+            </h1>
+
+            <hr />
+
+            <a asp-action="LichSu"
+               class="btn btn-primary">
+
+                Xem lịch sử thanh toán
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

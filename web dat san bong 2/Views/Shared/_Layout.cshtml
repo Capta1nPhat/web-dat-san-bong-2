@@ -1,0 +1,184 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CNPM.vn</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+            <div class="container-fluid px-4">
+                <a class="navbar-brand text-decoration-none fs-3" asp-controller="Home" asp-action="Index">
+                    <span class="fw-bold" style="color: var(--brand-green);">CNPM</span><span class="fw-bold text-secondary">.vn</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav me-auto ms-4 align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" asp-controller="SanBong" asp-action="Index"><i class="bi bi-search"></i> Tìm sân</a>
+                        </li>
+                       
+                        <li class="nav-item dropdown">
+                            <a class="nav-link nav-link-custom dropdown-toggle" href="#" data-bs-toggle="dropdown">Loại sân</a>
+                        </li>
+                        <a class="nav-link nav-link-custom" asp-controller="Home" asp-action="TienIch">
+                            <i class="bi bi-tv"></i> Tiện ích
+                        </a>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-custom" asp-controller="QuanLy" asp-action="LichSuDatSan"><i class="bi bi-journal-text"></i> Sân đã đặt</a>
+                        </li>
+                        @if (!string.IsNullOrEmpty(Context.Session.GetString("FullName")))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="QuanLy" asp-action="ThongTinCaNhan">
+                                        <i class="bi bi-person-lines-fill"></i> Quản lý thông tin
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="QuanLy" asp-action="TichDiemThanhVien">
+                                        <i class="bi bi-star-fill text-warning"></i> Điểm tích lũy
+                                    </a>
+                                </li>
+                            }
+                    </ul>
+                    
+                    <div class="d-flex align-items-center gap-3">
+                        @if (!string.IsNullOrEmpty(Context.Session.GetString("FullName")))
+                        {
+                            <span class="fw-bold" style="color: var(--brand-green);">
+                                <i class="bi bi-person-circle fs-5 align-middle me-1"></i>
+                                Hello, @Context.Session.GetString("FullName")
+                            </span>
+                            <a asp-controller="Auth" asp-action="Logout" class="btn btn-sm btn-outline-danger fw-bold rounded-pill px-3">
+                                <i class="bi bi-box-arrow-right"></i> Đăng xuất
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Auth" asp-action="Login" class="btn btn-outline-success rounded-pill px-4 fw-bold">
+                                Đăng nhập
+                            </a>
+                            <a asp-controller="Auth" asp-action="Register" class="btn btn-success rounded-pill px-4 fw-bold">
+                                Đăng ký
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    
+    
+    <footer class="text-white pt-5 pb-3 mt-5" style="background-color: #212529;">
+        <div class="container text-md-left">
+            <div class="row text-md-left">
+
+                
+                <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mt-3">
+                    <h3 class="fw-bold mb-4" style="color: #198754;">CNPM.vn</h3>
+                    <p class="text-light" style="opacity: 0.8;">
+                        Hệ thống đặt sân thể thao trực tuyến hàng đầu. Chúng tôi mang đến giải pháp tìm kiếm và đặt lịch nhanh chóng, tiện lợi, giúp bạn cháy hết mình với đam mê thể thao.
+                    </p>
+                    
+                </div>
+
+                
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold" style="color: #198754;">Khám phá</h5>
+                    <p>
+                        <a href="/" class="text-white text-decoration-none" style="opacity: 0.8;">Trang chủ</a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-white text-decoration-none" style="opacity: 0.8;">Tìm sân bóng</a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-white text-decoration-none" style="opacity: 0.8;">Dịch vụ & Tiện ích</a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-white text-decoration-none" style="opacity: 0.8;">Bảng giá</a>
+                    </p>
+                </div>
+
+               
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold" style="color: #198754;">Hỗ trợ</h5>
+                    <p>
+                        <a href="#" class="text-white text-decoration-none" style="opacity: 0.8;">Hướng dẫn đặt sân</a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-white text-decoration-none" style="opacity: 0.8;">Chính sách hủy sân</a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-white text-decoration-none" style="opacity: 0.8;">Quy định chung</a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-white text-decoration-none" style="opacity: 0.8;">Câu hỏi thường gặp</a>
+                    </p>
+                </div>
+
+                
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold" style="color: #198754;">Liên hệ</h5>
+                    <p class="text-light" style="opacity: 0.8;">
+                        <span class="me-2">📍</span> 123 Đường Sư Vạn Hạnh,Phường 12, Quận 10,TP.HCM
+                    </p>
+                    <p class="text-light" style="opacity: 0.8;">
+                        <span class="me-2">✉️</span> support@cnpm.vn
+                    </p>
+                    <p class="text-light" style="opacity: 0.8;">
+                        <span class="me-2">📞</span> +84 123 456 789
+                    </p>
+                    <p class="text-light" style="opacity: 0.8;">
+                        <span class="me-2">⏱️</span> 06:00 - 23:00 (Thứ 2 - CN)
+                    </p>
+                </div>
+
+            </div>
+
+            
+            <hr class="mb-4 mt-4" style="border-color: rgba(255,255,255,0.2);">
+
+            
+            <div class="row align-items-center">
+                <div class="col-md-7 col-lg-8">
+                    <p class="text-light mb-0" style="opacity: 0.8;">
+                        © 2026 Bản quyền thuộc về:
+                        <a href="/" class="text-decoration-none" style="color: #198754;">
+                            <strong>CNPM.vn</strong>
+                        </a>
+                    </p>
+                </div>
+                <div class="col-md-5 col-lg-4 text-md-end">
+                    <p class="text-light mb-0" style="opacity: 0.8; font-size: 0.9rem;">
+                        Nền tảng đặt sân thể thao thông minh
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+  
+   
+</body>
+</html>

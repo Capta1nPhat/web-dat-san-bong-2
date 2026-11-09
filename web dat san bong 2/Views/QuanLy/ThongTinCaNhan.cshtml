@@ -1,0 +1,95 @@
+﻿@model web_dat_san_bong_2.Models.NguoiDung
+
+@{
+    ViewData["Title"] = "Hỗ trợ quản lí tài khoản";
+}
+
+<div class="container mt-4 mb-5">
+    <div class="card shadow-sm border-dark" style="max-width: 800px; margin: 0 auto;">
+        <div class="card-body p-4">
+
+            <h5 class="mb-4">Hỗ trợ quản lí tài khoản người dùng</h5>
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    @TempData["Success"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            <form asp-action="UpdateProfile" method="post">
+                <input type="hidden" asp-for="MaNguoiDung" />
+
+                <table class="table table-bordered table-striped align-middle">
+                    <thead style="background-color: #1a5b75; color: white;">
+                        <tr>
+                            <th style="width: 35%; border-color: #1a5b75;">Thông tin</th>
+                            <th style="border-color: #1a5b75;">Nội dung</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-bold text-muted">Mã tài khoản</td>
+                            <td>
+                                <input type="text" class="form-control bg-light" value="@Model.MaNguoiDung" readonly />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-muted">Mã KH/NV</td>
+                            <td>
+                                <input type="text" class="form-control bg-light" value="KH-@Model.MaNguoiDung" readonly />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Họ tên</td>
+                            <td>
+                                <input asp-for="HoTen" class="form-control" />
+                                <span asp-validation-for="HoTen" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Số điện thoại</td>
+                            <td>
+                                <input asp-for="SoDienThoai" class="form-control" />
+                                <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Email</td>
+                            <td>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-muted">Vai trò</td>
+                            <td>
+                                <input type="text" class="form-control bg-light" value="Khách hàng" readonly />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-muted">Trạng thái tài khoản</td>
+                            <td>
+                                <input type="text" class="form-control bg-light" value="Hoạt động" readonly />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold text-muted">Ngày tạo tài khoản</td>
+                            <td>
+                                <input type="text" class="form-control bg-light" value="---" readonly />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="d-flex justify-content-center gap-3 mt-4">
+                    <button type="submit" class="btn btn-outline-danger px-4 fw-bold">Cập nhật</button>
+
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary px-4 fw-bold">Thoát</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

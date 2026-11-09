@@ -1,0 +1,169 @@
+﻿@{
+    ViewData["Title"] = "Trang Chủ";
+}
+
+<div class="hero-section position-relative">
+    <div class="hero-overlay"></div>
+
+    <div class="container position-relative text-center hero-content" style="z-index: 2;">
+        <h1 class="display-4 fw-bold text-white mb-3">
+            Đặt sân thể thao <br /> <span style="color: var(--brand-green);">nhanh - dễ - tiện</span>
+        </h1>
+        <p class="lead text-white-50 mb-5" style="font-size: 1.1rem;">
+            Tìm và đặt sân bóng đá, tennis, cầu lông ngay trong vài giây.<br />
+            Xem giá thực, lịch trống theo thời gian thực.
+        </p>
+
+        <div class="search-box-floating bg-white p-4 rounded-4 shadow-lg mx-auto" style="max-width: 800px;">
+            <form id="searchForm" class="row g-3 align-items-end" action="/SanBong/Index" method="get">
+
+                <div class="col-md-4 text-start">
+                    <label class="form-label text-muted small fw-bold mb-1"><i class="bi bi-geo-alt text-success"></i> Khu vực</label>
+                    <select class="form-select border-0 bg-light py-2" name="khuVuc">
+                        <option value="">Tất cả khu vực</option>
+                        <option value="Q10">123 sư vạn hạnh</option>
+                        <option value="Q1">quận 1</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4 text-start">
+                    <label class="form-label text-muted small fw-bold mb-1"><i class="bi bi-dribbble text-success"></i> Môn thể thao</label>
+                    <select id="loaiSanSelect" class="form-select border-0 bg-light py-2" name="loaiSan">
+                        <option value="">Tất cả các môn</option>
+                        <option value="BongDa">Bóng đá</option>
+                        <option value="Tennis">Tennis</option>
+                        <option value="CauLong">Cầu lông</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-success w-100 py-2">Tìm kiếm</button>
+                </div>
+            </form>
+        </div>
+        <script>
+    document.getElementById('searchForm').addEventListener('submit', function (e) {
+        // 1. Chặn hành động submit mặc định của form để nó không tự xóa URL của mình
+        e.preventDefault();
+
+        // 2. Lấy giá trị môn thể thao và khu vực (để không bị mất thông tin khu vực khi chuyển trang)
+        var loaiSan = document.getElementById('loaiSanSelect').value;
+        var khuVuc = document.querySelector('select[name="khuVuc"]').value; 
+
+        // 3. Khởi tạo biến chứa đường dẫn
+        var targetUrl = '';
+
+        // 4. Tạo đường dẫn kèm tham số (giữ lại cả khuVuc người dùng đã chọn)
+        if (loaiSan === 'BongDa') {
+            targetUrl = '/SanBong?keyword=&loaiSan=Bóng+đá&khuVuc=' + khuVuc; 
+        }
+        else if (loaiSan === 'CauLong') {
+            targetUrl = '/SanBong?keyword=&loaiSan=Cầu+lông&khuVuc=' + khuVuc; 
+        }
+        else if (loaiSan === 'Tennis') {
+            targetUrl = '/SanBong?keyword=&loaiSan=Tennis&khuVuc=' + khuVuc; 
+        }
+        else {
+            targetUrl = '/SanBong/Index?khuVuc=' + khuVuc; 
+        }
+
+        // 5. Ra lệnh cho trình duyệt chuyển hướng đến URL đã tạo
+        window.location.href = targetUrl;
+    });
+</script>
+    </div>
+</div>
+
+<div class="container position-relative" style="margin-top: -60px; z-index: 3; margin-bottom: 80px;">
+    <div class="row justify-content-center g-4">
+
+        <div class="col-6 col-md-3">
+            <a href="SanBong?keyword=&loaiSan=Bóng+đá" class="text-decoration-none">
+                <div class="card border-0 shadow-sm rounded-4 hover-lift text-center h-100">
+                    <div class="card-body py-4">
+                        <div class="display-5 mb-2" style="color: var(--brand-green);"><i class="bi bi-dribbble"></i></div>
+                        <h6 class="fw-bold text-dark mb-0">Bóng đá</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-6 col-md-3">
+            <a href="/SanBong?loaiSan=Tennis" class="text-decoration-none">
+                <div class="card border-0 shadow-sm rounded-4 hover-lift text-center h-100">
+                    <div class="card-body py-4">
+                        <div class="display-5 mb-2" style="color: var(--brand-green);"><i class="bi bi-record-circle"></i></div>
+                        <h6 class="fw-bold text-dark mb-0">Tennis</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-6 col-md-3">
+            <a href="/SanBong?keyword=&loaiSan=Cầu+lông" class="text-decoration-none">
+                <div class="card border-0 shadow-sm rounded-4 hover-lift text-center h-100">
+                    <div class="card-body py-4">
+                        <div class="display-5 mb-2" style="color: var(--brand-green);"><i class="bi bi-capsule"></i></div>
+                        <h6 class="fw-bold text-dark mb-0">Cầu lông</h6>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<div class="container mb-5" style="margin-top: 60px;">
+    <h3 class="fw-bold text-center mb-4">Khám phá cơ sở vật chất</h3>
+
+    <div id="sanBongCarousel" class="carousel slide carousel-fade shadow-lg rounded-4 overflow-hidden" data-bs-ride="carousel">
+
+       
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#sanBongCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+            <button type="button" data-bs-target="#sanBongCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#sanBongCarousel" data-bs-slide-to="2"></button>
+        </div>
+
+       
+        <div class="carousel-inner">
+
+            
+            <div class="carousel-item active" data-bs-interval="3000">
+               
+                <img src="~/images/football.jpg" class="d-block w-100" alt="Sân bóng đá" style="height: 450px; object-fit: cover;">
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3 p-3 mb-4">
+                    <h5>Sân cỏ nhân tạo đạt chuẩn</h5>
+                    <p>Hệ thống chiếu sáng LED hiện đại, mặt cỏ êm ái.</p>
+                </div>
+            </div>
+
+          
+            <div class="carousel-item" data-bs-interval="3000">
+                <img src="~/images/tennis.jpg" class="d-block w-100" alt="Sân Tennis" style="height: 450px; object-fit: cover;">
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3 p-3 mb-4">
+                    <h5>Sân Tennis chuyên nghiệp</h5>
+                    <p>Mặt sân nhám chuẩn quốc tế, không gian thoáng đãng.</p>
+                </div>
+            </div>
+
+          
+            <div class="carousel-item" data-bs-interval="3000">
+                <img src="~/images/badminton.jpg" class="d-block w-100" alt="Sân Cầu lông" style="height: 450px; object-fit: cover;">
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3 p-3 mb-4">
+                    <h5>Nhà thi đấu Cầu lông</h5>
+                    <p>Thảm PVC chống trượt, trần cao không lóa mắt.</p>
+                </div>
+            </div>
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#sanBongCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Trước</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#sanBongCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Sau</span>
+        </button>
+    </div>
+</div>

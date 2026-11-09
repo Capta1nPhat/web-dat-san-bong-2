@@ -1,0 +1,202 @@
+﻿@model IEnumerable<web_dat_san_bong_2.Models.ThanhToan>
+
+@{
+    ViewData["Title"] = "Lịch sử thanh toán";
+}
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+            <h3>Lịch sử thanh toán</h3>
+        </div>
+
+        <div class="card-body">
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData["Success"]
+                </div>
+            }
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["Error"]
+                </div>
+            }
+
+            <table class="table table-bordered table-hover align-middle">
+
+                <thead class="table-light">
+
+                    <tr>
+
+                        <th>Mã TT</th>
+
+                        <th>Sân</th>
+
+                        <th>Ngày chơi</th>
+
+                        <th>Khung giờ</th>
+
+                        <th>Phương thức</th>
+
+                        <th>Số tiền</th>
+
+                        <th>Trạng thái</th>
+
+                        <th width="280">Thao tác</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>@item.MaThanhToan</td>
+
+                            <td>@item.MaDatSanNavigation.MaSanNavigation.TenSan</td>
+
+                            <td>@item.MaDatSanNavigation.NgayChoi</td>
+
+                            <td>
+                                @item.MaDatSanNavigation.GioBatDau
+                                -
+                                @item.MaDatSanNavigation.GioKetThuc
+                            </td>
+
+                            <td>@item.PhuongThuc</td>
+
+                            <td class="text-danger">
+                                <b>
+                                    @String.Format("{0:N0}", item.SoTien)
+                                    VNĐ
+                                </b>
+                            </td>
+
+                            @if (item.MaDatSanNavigation.TrangThaiDon == "Chờ thanh toán")
+                            {
+                                <span class="badge bg-warning text-dark">
+                                    Chờ thanh toán
+                                </span>
+                            }
+                            else if (item.MaDatSanNavigation.TrangThaiDon == "Chờ xác nhận")
+                            {
+                                <span class="badge bg-info">
+                                    Chờ xác nhận
+                                </span>
+                            }
+                            else if (item.MaDatSanNavigation.TrangThaiDon == "Đã thanh toán")
+                            {
+                                <span class="badge bg-success">
+                                    Đã thanh toán
+                                </span>
+                            }
+                            else if (item.MaDatSanNavigation.TrangThaiDon == "Đã hủy")
+                            {
+                                <span class="badge bg-danger">
+                                    Đã hủy
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">
+                                    Hoàn thành
+                                </span>
+                            }
+
+                            <td>
+
+                                <a asp-controller="ThanhToan"
+                                   asp-action="HoaDon"
+                                   asp-route-id="@item.MaDatSan"
+                                   class="btn btn-primary btn-sm mb-1">
+
+                                    Hóa đơn
+
+                                </a>
+
+                                @if (item.MaDatSanNavigation.TrangThaiDon == "Chờ thanh toán"
+                                  || item.MaDatSanNavigation.TrangThaiDon == "Chờ xác nhận")
+                                {
+
+                                    <a asp-controller="DatSan"
+                                       asp-action="DoiLich"
+                                       asp-route-id="@item.MaDatSan"
+                                       class="btn btn-warning btn-sm mb-1">
+
+                                        Đổi lịch
+
+                                    </a>
+
+                                    <form asp-controller="DatSan"
+                                          asp-action="Huy"
+                                          method="post"
+                                          style="display:inline;">
+
+                                        <input type="hidden"
+                                               name="id"
+                                               value="@item.MaDatSan" />
+
+                                        <button class="btn btn-danger btn-sm"
+                                                onclick="return confirm('Bạn chắc chắn muốn hủy lịch?')">
+
+                                            Hủy
+
+                                        </button>
+
+                                    </form>
+
+                                }
+                                else if (item.MaDatSanNavigation.TrangThaiDon == "Đã thanh toán")
+                                {
+
+                                    <span class="badge bg-success">
+
+                                        Đã thanh toán
+
+                                    </span>
+
+                                }
+                                else if (item.MaDatSanNavigation.TrangThaiDon == "Đã hủy")
+                                {
+
+                                    <span class="badge bg-danger">
+
+                                        Đã hủy
+
+                                    </span>
+
+                                }
+                                else
+                                {
+
+                                    <span class="badge bg-secondary">
+
+                                        Hoàn thành
+
+                                    </span>
+
+                                }
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

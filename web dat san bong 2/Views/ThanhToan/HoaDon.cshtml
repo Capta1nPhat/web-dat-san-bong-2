@@ -1,0 +1,134 @@
+﻿@model web_dat_san_bong_2.Models.HoaDon
+
+@{
+    ViewData["Title"] = "Hóa đơn";
+}
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+
+            <h2>HÓA ĐƠN THANH TOÁN</h2>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <h5>Thông tin hóa đơn</h5>
+
+                    <table class="table table-borderless">
+
+                        <tr>
+                            <td>Mã hóa đơn</td>
+                            <td><b>#@Model.MaHoaDon</b></td>
+                        </tr>
+
+                        <tr>
+                            <td>Mã đơn đặt</td>
+                            <td>@Model.MaDatSan</td>
+                        </tr>
+
+                        <tr>
+                            <td>Ngày xuất</td>
+                            <td>@Model.NgayXuat.ToString("dd/MM/yyyy HH:mm")</td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <h5>Thông tin sân</h5>
+
+                    <table class="table table-borderless">
+
+                        <tr>
+                            <td>Tên sân</td>
+                            <td>
+                                @Model.MaDatSanNavigation.MaSanNavigation.TenSan
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Ngày chơi</td>
+                            <td>
+                                @Model.MaDatSanNavigation.NgayChoi
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Giờ chơi</td>
+                            <td>
+
+                                @Model.MaDatSanNavigation.GioBatDau
+
+                                -
+
+                                @Model.MaDatSanNavigation.GioKetThuc
+
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            <hr />
+
+            <h4 class="text-center">
+
+                Tổng thanh toán
+
+            </h4>
+
+            <h2 class="text-center text-danger">
+
+                @String.Format("{0:N0}", Model.TongTien)
+
+                VNĐ
+
+            </h2>
+
+            <hr />
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <a asp-controller="SanBong"
+                       asp-action="Index"
+                       class="btn btn-primary w-100">
+
+                        Tiếp tục đặt sân
+
+                    </a>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <button class="btn btn-success w-100"
+                            onclick="window.print()">
+
+                        🖨 In hóa đơn
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,179 @@
+﻿@model IEnumerable<web_dat_san_bong_2.Models.SanTheThao>
+
+@{
+    ViewData["Title"] = "Danh sách sân";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow mb-4">
+
+        <div class="card-header bg-success text-white">
+            <h3>Tìm kiếm sân</h3>
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Index" method="get">
+
+                <div class="row">
+
+                    <div class="col-md-5">
+
+                        <input type="text"
+                               name="keyword"
+                               class="form-control"
+                               placeholder="Tên sân hoặc địa chỉ..."
+                               value="@ViewBag.Keyword" />
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <select name="loaiSan" class="form-select">
+
+                            <option value="">Tất cả môn</option>
+
+                            <option value="Bóng đá"
+                                    selected="@(ViewBag.LoaiSan == "Bóng đá")">
+                                Bóng đá
+                            </option>
+
+                            <option value="Cầu lông"
+                                    selected="@(ViewBag.LoaiSan == "Cầu lông")">
+                                Cầu lông
+                            </option>
+
+                            <option value="Tennis"
+                                    selected="@(ViewBag.LoaiSan == "Tennis")">
+                                Tennis
+                            </option>
+
+                           
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <button class="btn btn-success w-100">
+
+                            🔍 Tìm kiếm
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        @if (!Model.Any())
+        {
+            <div class="col-12">
+
+                <div class="alert alert-warning text-center">
+
+                    Không tìm thấy sân phù hợp.
+
+                </div>
+
+            </div>
+        }
+
+        @foreach (var item in Model)
+        {
+            decimal gia = 0;
+
+            if (item.BangGia.Any())
+            {
+                gia = item.BangGia.Min(x => x.Gia);
+            }
+
+            <div class="col-lg-4 mb-4">
+
+                <div class="card shadow h-100">
+
+                    @if (string.IsNullOrEmpty(item.HinhAnh))
+                    {
+                        <img src="/images/no-image.jpg"
+                             class="card-img-top"
+                             style="height:220px;object-fit:cover;" />
+                    }
+                    else
+                    {
+                        <img src="@item.HinhAnh"
+                             class="card-img-top"
+                             style="height:220px;object-fit:cover;" />
+                    }
+
+                    <div class="card-body">
+
+                        <h4>@item.TenSan</h4>
+
+                        <span class="badge bg-success">
+                            @item.TrangThai
+                        </span>
+
+                        <hr />
+
+                        <p>
+                            📍 @item.DiaChi
+                        </p>
+
+                        <p>
+                            🏆 @item.LoaiSan
+                        </p>
+
+                        <p>
+                            🕒 @item.GioMo - @item.GioDong
+                        </p>
+
+                        <h5 class="text-danger">
+
+                            @String.Format("{0:N0}", gia)
+                            VNĐ / giờ
+
+                        </h5>
+
+                    </div>
+
+                    <div class="card-footer bg-white">
+
+                        <div class="d-grid gap-2">
+
+                            <a asp-action="Detail"
+                               asp-route-id="@item.MaSan"
+                               class="btn btn-primary">
+
+                                Chi tiết
+
+                            </a>
+
+                            <a asp-action="LichDat"
+                               asp-route-id="@item.MaSan"
+                               class="btn btn-warning">
+
+                                Xem lịch
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>

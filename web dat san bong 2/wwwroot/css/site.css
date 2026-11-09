@@ -1,0 +1,231 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+:root {
+    --brand-green: #2ecc71;
+    --text-dark: #4a4a4a;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar-custom {
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 12px 0;
+}
+
+.nav-link-custom {
+    color: var(--text-dark) !important;
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin: 0 8px;
+    transition: color 0.3s;
+}
+
+    .nav-link-custom:hover {
+        color: var(--brand-green) !important;
+    }
+
+    .nav-link-custom i {
+        margin-right: 4px;
+        font-size: 1.1rem;
+        color: #888;
+    }
+
+
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 85vh;
+    min-height: 600px;
+ 
+    background: url('../Images/stadium.jpg') center center/cover no-repeat;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-hero {
+    background-color: #ffffff;
+    color: var(--brand-green);
+    font-weight: bold;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+    .btn-hero:hover {
+        background-color: #f8f9fa;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        color: var(--brand-green);
+    }
+
+.auth-page-container {
+    
+    min-height: calc(100vh - 76px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f7f6; 
+}
+
+.auth-card {
+    background: #ffffff;
+    border-radius: 16px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+}
+
+
+.auth-logo-circle {
+    width: 65px;
+    height: 65px;
+    background-color: var(--brand-green);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin: 0 auto 20px auto;
+}
+
+
+.input-group-custom .input-group-text {
+    background-color: transparent;
+    border-right: none;
+    color: #888;
+}
+
+.input-group-custom .form-control {
+    border-left: none;
+}
+
+    .input-group-custom .form-control:focus {
+        box-shadow: none;
+        border-color: #ced4da;
+    }
+
+.input-group-custom:focus-within {
+    border-radius: 6px;
+    box-shadow: 0 0 0 0.25rem rgba(46, 204, 113, 0.25);
+}
+
+.btn-brand {
+    background-color: var(--brand-green);
+    color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 12px;
+    transition: all 0.3s;
+}
+
+    .btn-brand:hover {
+        background-color: #27ae60;
+        color: white;
+    }
+
+.btn-outline-success {
+    border-color: #e9ecef;
+    color: #4a4a4a;
+    transition: all 0.3s;
+}
+
+    .btn-outline-success:hover, .btn-outline-success.active {
+        background-color: var(--brand-green);
+        color: white;
+        border-color: var(--brand-green);
+    }
+
+
+.card {
+    transition: transform 0.3s;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+.btn-brand {
+    background-color: var(--brand-green);
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.hero-section {
+    
+    background: url('../images/stadium.jpg') center/cover no-repeat;
+    min-height: 85vh; /
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+.hero-content {
+    padding-bottom: 50px; 
+}
+
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: white;
+}
+
+    .hover-lift:hover {
+        transform: translateY(-8px); 
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important; 
+    }

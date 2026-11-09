@@ -1,0 +1,92 @@
+﻿@model web_dat_san_bong_2.Models.SanTheThao
+
+@{
+    ViewData["Title"] = "Thêm sân mới";
+}
+
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0 rounded-4">
+
+                <div class="card-header bg-white border-bottom pt-4 pb-3">
+                    <h3 class="fw-bold text-center mb-0" style="color: var(--brand-green);">
+                        <i class="bi bi-plus-circle-dotted me-2"></i>Thêm sân thể thao mới
+                    </h3>
+                </div>
+
+                <div class="card-body p-5">
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <h5 class="fw-bold mb-3 border-bottom pb-2">1. Thông tin cơ bản</h5>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label asp-for="TenSan" class="form-label fw-semibold">Tên sân</label>
+                                <input asp-for="TenSan" class="form-control" placeholder="nhap ten san bong" required />
+                                <span asp-validation-for="TenSan" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="LoaiSan" class="form-label fw-semibold">Loại môn thể thao</label>
+                                <select asp-for="LoaiSan" class="form-select" required>
+                                    <option value="">-- Chọn loại sân --</option>
+                                    <option value="Bóng đá">Bóng đá</option>
+                                    <option value="Tennis">Tennis</option>
+                                    <option value="Cầu lông">Cầu lông</option>
+                                </select>
+                                <span asp-validation-for="LoaiSan" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label asp-for="DiaChi" class="form-label fw-semibold">Địa chỉ chi tiết</label>
+                                <input asp-for="DiaChi" class="form-control" placeholder="Nhập địa chỉ đầy đủ của sân" required />
+                                <span asp-validation-for="DiaChi" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label asp-for="MoTa" class="form-label fw-semibold">Mô tả thêm</label>
+                                <textarea asp-for="MoTa" class="form-control" rows="3" placeholder="Nhập thông tin mặt sân, diện tích, quy định riêng..."></textarea>
+                                <span asp-validation-for="MoTa" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <h5 class="fw-bold mb-3 border-bottom pb-2">2. Hoạt động & Hình ảnh</h5>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <label asp-for="GioMo" class="form-label fw-semibold">Giờ mở cửa</label>
+                                <input asp-for="GioMo" type="time" class="form-control" required />
+                                <span asp-validation-for="GioMo" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="GioDong" class="form-label fw-semibold">Giờ đóng cửa</label>
+                                <input asp-for="GioDong" type="time" class="form-control" required />
+                                <span asp-validation-for="GioDong" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label asp-for="TrangThai" class="form-label fw-semibold">Trạng thái</label>
+                                <select asp-for="TrangThai" class="form-select">
+                                    <option value="Hoạt động" selected>Hoạt động</option>
+                                    <option value="Tạm ngưng">Tạm ngưng</option>
+                                </select>
+                                <span asp-validation-for="TrangThai" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <label asp-for="HinhAnh" class="form-label fw-semibold">Link hình ảnh (URL)</label>
+                                <input asp-for="HinhAnh" class="form-control" placeholder="VD: /images/san-bong-k34.jpg" />
+                                <span asp-validation-for="HinhAnh" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2 mt-2">
+                            <a asp-action="Index" class="btn btn-light border px-4 py-2 rounded-3 text-secondary fw-semibold">
+                                Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-brand px-4 py-2 rounded-3" style="background-color: var(--brand-green); color: white;">
+                                <i class="bi bi-save me-2"></i>Lưu Sân Mới
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

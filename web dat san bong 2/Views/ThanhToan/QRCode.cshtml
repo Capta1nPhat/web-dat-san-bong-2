@@ -1,0 +1,88 @@
+﻿@model web_dat_san_bong_2.Models.DonDatSan
+
+@{
+    ViewData["Title"] = "Thanh toán QR";
+}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white text-center">
+
+                    <h3>@ViewBag.PhuongThuc</h3>
+
+                </div>
+
+                <div class="card-body text-center">
+
+                    <h5>Quét mã QR để thanh toán</h5>
+
+                    <img src="@ViewBag.QR"
+                         class="img-fluid border rounded"
+                         style="max-width:300px;" />
+
+                    <hr />
+
+                    <h4 class="text-danger">
+
+                        @String.Format("{0:N0}", ViewBag.SoTien) VNĐ
+
+                    </h4>
+
+                    <p>
+
+                        Nội dung chuyển khoản
+
+                    </p>
+
+                    <h5>
+
+                        Thanh toan don @Model.MaDatSan
+
+                    </h5>
+
+                    <hr />
+
+                    <form asp-action="XacNhanThanhToan"
+                          method="post">
+
+                        <input type="hidden"
+                               name="maDatSan"
+                               value="@Model.MaDatSan" />
+
+                        <input type="hidden"
+                               name="phuongThuc"
+                               value="@ViewBag.PhuongThuc" />
+
+                        <button class="btn btn-success btn-lg w-100">
+
+                            ✔ Tôi đã thanh toán
+
+                        </button>
+
+                    </form>
+
+                    <br />
+
+                    <a asp-action="Index"
+                       asp-route-id="@Model.MaDatSan"
+                       class="btn btn-secondary w-100">
+
+                        Quay lại
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,131 @@
+﻿@model web_dat_san_bong_2.Models.DonDatSan
+
+@{
+    ViewData["Title"] = "Thanh toán";
+}
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+
+            <h3>Thanh toán đơn đặt sân</h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <h5>Thông tin sân</h5>
+
+            <table class="table">
+
+                <tr>
+                    <td><b>Tên sân</b></td>
+                    <td>@Model.MaSanNavigation.TenSan</td>
+                </tr>
+
+                <tr>
+                    <td><b>Ngày chơi</b></td>
+                    <td>@Model.NgayChoi</td>
+                </tr>
+
+                <tr>
+                    <td><b>Giờ</b></td>
+                    <td>
+                        @Model.GioBatDau -
+                        @Model.GioKetThuc
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><b>Tổng tiền</b></td>
+
+                    <td class="text-danger">
+
+                        <b>
+                            @String.Format("{0:N0}", ViewBag.TongTien) VNĐ
+                        </b>
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+            <hr />
+
+            <h4>Chọn phương thức thanh toán</h4>
+
+            <div class="row mt-4">
+
+                <div class="col-md-3">
+
+                    <a asp-action="QRCode"
+                       asp-route-id="@Model.MaDatSan"
+                       asp-route-phuongThuc="MoMo"
+                       class="btn btn-lg btn-danger w-100">
+
+                        <img src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png"
+                             width="40" />
+
+                        <br />
+
+                        MoMo
+
+                    </a>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <a asp-action="QRCode"
+                       asp-route-id="@Model.MaDatSan"
+                       asp-route-phuongThuc="VNPay"
+                       class="btn btn-lg btn-primary w-100">
+
+                        VNPay
+
+                    </a>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <a asp-action="QRCode"
+                       asp-route-id="@Model.MaDatSan"
+                       asp-route-phuongThuc="ZaloPay"
+                       class="btn btn-lg btn-info w-100">
+
+                        ZaloPay
+
+                    </a>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <form asp-action="ThanhToanTaiSan"
+                          method="post">
+
+                        <input type="hidden"
+                               name="maDatSan"
+                               value="@Model.MaDatSan" />
+
+                        <button class="btn btn-success btn-lg w-100">
+
+                            Thanh toán tại sân
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

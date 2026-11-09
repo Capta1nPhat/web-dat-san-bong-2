@@ -1,0 +1,122 @@
+﻿@{
+    ViewData["Title"] = "Tiện ích & Dịch vụ";
+}
+
+<style>
+    .service-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        height: 100%;
+    }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+    .service-icon {
+        font-size: 3rem;
+        color: #198754; /* Màu xanh lá đồng bộ với nút Tìm kiếm trên trang chủ */
+        margin-bottom: 15px;
+    }
+
+    .price-badge {
+        font-size: 0.9rem;
+        font-weight: bold;
+        padding: 5px 12px;
+        border-radius: 20px;
+    }
+
+    .bg-free {
+        background-color: #e8f5e9;
+        color: #2e7d32;
+    }
+
+    .bg-paid {
+        background-color: #fff3e0;
+        color: #e65100;
+    }
+</style>
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="fw-bold" style="color: #198754;">Tiện ích & Dịch vụ tại sân</h1>
+        <p class="text-muted">Trải nghiệm không gian thể thao chuyên nghiệp với đầy đủ trang thiết bị và dịch vụ hỗ trợ tốt nhất.</p>
+    </div>
+
+    <div class="row g-4">
+        <!-- Dịch vụ 1: Bãi giữ xe -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card service-card text-center p-4">
+                <div class="card-body">
+                    <div class="service-icon">🏍️</div>
+                    <h4 class="card-title fw-bold">Bãi giữ xe rộng rãi</h4>
+                    <p class="card-text text-muted">Bãi đỗ xe an ninh, có sức chứa lớn cho cả xe máy và ô tô. Có bảo vệ túc trực 24/7.</p>
+                    <span class="price-badge bg-free">Miễn phí</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dịch vụ 2: Đèn chiếu sáng -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card service-card text-center p-4">
+                <div class="card-body">
+                    <div class="service-icon">💡</div>
+                    <h4 class="card-title fw-bold">Đèn LED chuẩn thi đấu</h4>
+                    <p class="card-text text-muted">Hệ thống đèn pha chống lóa hiện đại, đảm bảo độ sáng hoàn hảo cho các trận đấu buổi tối.</p>
+                    <span class="price-badge bg-free">Miễn phí</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dịch vụ 3: Nước uống -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card service-card text-center p-4">
+                <div class="card-body">
+                    <div class="service-icon">🥤</div>
+                    <h4 class="card-title fw-bold">Nước uống & Căn tin</h4>
+                    <p class="card-text text-muted">Cung cấp đa dạng các loại nước khoáng, nước bù điện giải ướp lạnh sẵn sàng phục vụ.</p>
+                    <span class="price-badge bg-paid">Từ 15.000đ</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dịch vụ 4: Thuê bóng -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card service-card text-center p-4">
+                <div class="card-body">
+                    <div class="service-icon">⚽</div>
+                    <h4 class="card-title fw-bold">Thuê bóng chính hãng</h4>
+                    <p class="card-text text-muted">Cho thuê các loại bóng thi đấu chất lượng cao (Động Lực, Molten...) luôn được bơm đủ áp suất.</p>
+                    <span class="price-badge bg-paid">120.000đ / Trận</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dịch vụ 5: Thuê áo Bib -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card service-card text-center p-4">
+                <div class="card-body">
+                    <div class="service-icon">🎽</div>
+                    <h4 class="card-title fw-bold">Áo chíp (Bib) chia đội</h4>
+                    <p class="card-text text-muted">Áo lưới chia đội nhiều màu sắc, thoáng mát và luôn được giặt sạch sẽ sau mỗi trận.</p>
+                    <span class="price-badge bg-paid">80.000đ / Bộ (10 áo)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dịch vụ 6: Trọng tài -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card service-card text-center p-4">
+                <div class="card-body">
+                    <div class="service-icon">哨</div>
+                    <h4 class="card-title fw-bold">Thuê trọng tài</h4>
+                    <p class="card-text text-muted">Cung cấp đội ngũ trọng tài chuyên nghiệp, am hiểu luật lệ giúp trận đấu công bằng, hấp dẫn.</p>
+                    <span class="price-badge bg-paid">300.000đ / Trận</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

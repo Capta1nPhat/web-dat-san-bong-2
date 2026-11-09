@@ -1,0 +1,150 @@
+﻿@model web_dat_san_bong_2.Models.SanTheThao
+
+@{
+    ViewData["Title"] = "Đặt sân";
+
+    var bangGia = (web_dat_san_bong_2.Models.BangGium)ViewBag.BangGia;
+}
+
+<div class="container mt-4">
+
+    <div class="row">
+
+        <div class="col-md-8">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-success text-white">
+
+                    <h3>Thông tin đặt sân</h3>
+
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table">
+
+                        <tr>
+                            <th width="180">Tên sân</th>
+                            <td>@Model.TenSan</td>
+                        </tr>
+
+                        <tr>
+                            <th>Địa chỉ</th>
+                            <td>@Model.DiaChi</td>
+                        </tr>
+
+                        <tr>
+                            <th>Loại sân</th>
+                            <td>@Model.LoaiSan</td>
+                        </tr>
+
+                        <tr>
+                            <th>Ngày chơi</th>
+                            <td>@ViewBag.Ngay</td>
+                        </tr>
+
+                        <tr>
+                            <th>Khung giờ</th>
+                            <td>
+
+                                @bangGia.GioBatDau
+
+                                -
+
+                                @bangGia.GioKetThuc
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Giá</th>
+                            <td class="text-danger">
+
+                                <b>
+
+                                    @String.Format("{0:N0}", bangGia.Gia)
+
+                                    VNĐ
+
+                                </b>
+
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white">
+
+                    <h4>Xác nhận</h4>
+
+                </div>
+
+                <div class="card-body">
+
+                    <h5>
+
+                        Tổng thanh toán
+
+                    </h5>
+
+                    <h2 class="text-danger">
+
+                        @String.Format("{0:N0}", bangGia.Gia)
+
+                        VNĐ
+
+                    </h2>
+
+                    <hr />
+
+                    <form asp-action="Create" method="post">
+
+                        <input type="hidden"
+                               name="maSan"
+                               value="@Model.MaSan" />
+
+                        <input type="hidden"
+                               name="maGia"
+                               value="@bangGia.MaGia" />
+
+                        <input type="hidden"
+                               name="ngay"
+                               value="@ViewBag.Ngay" />
+
+                        <button class="btn btn-success w-100 mb-2">
+
+                            Xác nhận đặt sân
+
+                        </button>
+
+                    </form>
+
+                    <a asp-controller="SanBong"
+                       asp-action="LichDat"
+                       asp-route-id="@Model.MaSan"
+                       class="btn btn-secondary w-100">
+
+                        Quay lại
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

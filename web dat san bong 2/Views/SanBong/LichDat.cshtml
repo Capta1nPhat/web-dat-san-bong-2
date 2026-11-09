@@ -1,0 +1,160 @@
+﻿@model web_dat_san_bong_2.Models.SanTheThao
+
+@using web_dat_san_bong_2.Models
+
+@{
+    ViewData["Title"] = "Lịch đặt sân";
+
+    var bangGia = ViewBag.BangGia as List<BangGium>;
+
+    var daDat = ViewBag.DaDat as List<DonDatSan>;
+
+    DateOnly ngay = ViewBag.Ngay;
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+
+            <h3>@Model.TenSan</h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="get">
+
+                <input type="hidden"
+                       name="id"
+                       value="@Model.MaSan" />
+
+                <div class="row">
+
+                    <div class="col-md-4">
+
+                        <input type="date"
+                               class="form-control"
+                               name="ngay"
+                               value="@ngay.ToString("yyyy-MM-dd")" />
+
+                    </div>
+
+                    <div class="col-md-2">
+
+                        <button class="btn btn-success">
+
+                            Xem lịch
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+            <hr />
+
+            <table class="table table-bordered">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Khung giờ</th>
+
+                        <th>Giá</th>
+
+                        <th>Trạng thái</th>
+
+                        <th></th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in bangGia)
+                    {
+                        bool dat = daDat.Any(x =>
+
+                            x.GioBatDau == item.GioBatDau
+
+                            &&
+
+                            x.GioKetThuc == item.GioKetThuc);
+
+                        <tr>
+
+                            <td>
+
+                                @item.GioBatDau
+
+                                -
+
+                                @item.GioKetThuc
+
+                            </td>
+
+                            <td>
+
+                                @String.Format("{0:N0}", item.Gia)
+
+                                VNĐ
+
+                            </td>
+
+                            <td>
+
+                                @if (dat)
+                                {
+                                    <span class="badge bg-danger">
+
+                                        Đã đặt
+
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">
+
+                                        Còn trống
+
+                                    </span>
+                                }
+
+                            </td>
+
+                            <td>
+
+                                @if (!dat)
+                                {
+                                    <a asp-controller="DatSan"
+                                       asp-action="Create"
+                                       asp-route-id="@Model.MaSan"
+                                       asp-route-maGia="@item.MaGia"
+                                       asp-route-ngay="@ngay"
+                                       class="btn btn-primary">
+
+                                        Đặt sân
+
+                                    </a>
+                                }
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

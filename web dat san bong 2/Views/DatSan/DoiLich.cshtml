@@ -1,0 +1,99 @@
+﻿@model web_dat_san_bong_2.Models.DonDatSan
+
+@{
+    ViewData["Title"] = "Đổi lịch đặt sân";
+
+    var dsGia = (List<web_dat_san_bong_2.Models.BangGium>)ViewBag.BangGia;
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-warning text-dark">
+            <h3>Đổi lịch đặt sân</h3>
+        </div>
+
+        <div class="card-body">
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["Error"]
+                </div>
+            }
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData["Success"]
+                </div>
+            }
+
+            <form asp-action="DoiLich" method="post">
+
+                <input type="hidden"
+                       name="maDatSan"
+                       value="@Model.MaDatSan" />
+
+                <div class="mb-3">
+
+                    <label>Ngày chơi</label>
+
+                    <input type="date"
+                           class="form-control"
+                           name="ngay"
+                           value="@Model.NgayChoi.ToString("yyyy-MM-dd")" />
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Khung giờ</label>
+
+                    <select class="form-select"
+                            name="maGia">
+
+                        @foreach (var item in dsGia)
+                        {
+                            if (item.MaGia == Model.MaGia)
+                            {
+                                <option selected value="@item.MaGia">
+                                    @item.GioBatDau - @item.GioKetThuc
+                                    -
+                                    @String.Format("{0:N0}", item.Gia) VNĐ
+                                </option>
+                            }
+                            else
+                            {
+                                <option value="@item.MaGia">
+                                    @item.GioBatDau - @item.GioKetThuc
+                                    -
+                                    @String.Format("{0:N0}", item.Gia) VNĐ
+                                </option>
+                            }
+                        }
+
+                    </select>
+
+                </div>
+
+                <button class="btn btn-warning">
+                    Lưu thay đổi
+                </button>
+
+                <a asp-controller="ThanhToan"
+                   asp-action="LichSu"
+                   class="btn btn-secondary">
+
+                    Quay lại
+
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,226 @@
+﻿@model web_dat_san_bong_2.Models.SanTheThao
+
+@{
+    ViewData["Title"] = "Chi tiết sân";
+}
+
+<div class="container mt-4">
+
+    <div class="row">
+
+        <!-- Hình ảnh -->
+
+        <div class="col-md-6">
+
+            @if (string.IsNullOrEmpty(Model.HinhAnh))
+            {
+                <img src="/images/no-image.jpg"
+                     class="img-fluid rounded shadow" />
+            }
+            else
+            {
+                <img src="@Model.HinhAnh"
+                     class="img-fluid rounded shadow" />
+            }
+
+        </div>
+
+        <!-- Thông tin -->
+
+        <div class="col-md-6">
+
+            <h2>
+
+                @Model.TenSan
+
+            </h2>
+
+            <span class="badge bg-success">
+
+                @Model.TrangThai
+
+            </span>
+
+            <hr />
+
+            <h5>
+
+                📍 Địa chỉ
+
+            </h5>
+
+            <p>
+
+                @Model.DiaChi
+
+            </p>
+
+            <h5>
+
+                🏆 Loại sân
+
+            </h5>
+
+            <p>
+
+                @Model.LoaiSan
+
+            </p>
+
+            <h5>
+
+                🕒 Giờ hoạt động
+
+            </h5>
+
+            <p>
+
+                @Model.GioMo
+
+                -
+
+                @Model.GioDong
+
+            </p>
+
+            <h5>
+
+                📝 Mô tả
+
+            </h5>
+
+            <p>
+
+                @(string.IsNullOrEmpty(Model.MoTa)
+                    ? "Chưa có mô tả."
+                    : Model.MoTa)
+
+            </p>
+
+            <hr />
+
+            <a asp-controller="SanBong"
+               asp-action="LichDat"
+               asp-route-id="@Model.MaSan"
+               class="btn btn-warning">
+                Chọn khung giờ & Đặt sân
+            </a>
+
+        </div>
+
+    </div>
+
+    <hr class="mt-5" />
+
+    <!-- Bảng giá -->
+
+    <h3>
+
+        Bảng giá
+
+    </h3>
+
+    <table class="table table-bordered table-hover">
+
+        <thead class="table-success">
+
+            <tr>
+
+                <th>Ngày áp dụng</th>
+
+                <th>Khung giờ</th>
+
+                <th>Giá</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach (var gia in Model.BangGia.OrderBy(x => x.NgayApDung))
+            {
+                <tr>
+
+                    <td>
+
+                        @gia.NgayApDung
+
+                    </td>
+
+                    <td>
+
+                        @gia.GioBatDau
+
+                        -
+
+                        @gia.GioKetThuc
+
+                    </td>
+
+                    <td class="text-danger">
+
+                        <b>
+
+                            @String.Format("{0:N0}", gia.Gia)
+
+                            VNĐ
+
+                        </b>
+
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+    <hr />
+
+    <!-- Tiện ích -->
+
+    <h3>
+
+        Tiện ích
+
+    </h3>
+
+    @if (Model.TienIches.Any())
+    {
+        <div class="row">
+
+            @foreach (var item in Model.TienIches)
+            {
+                <div class="col-md-3 mb-3">
+
+                    <div class="card">
+
+                        <div class="card-body text-center">
+
+                            <h5>
+
+                                @item.TenTienIch
+
+                            </h5>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+
+            Chưa có tiện ích.
+
+        </div>
+    }
+
+</div>

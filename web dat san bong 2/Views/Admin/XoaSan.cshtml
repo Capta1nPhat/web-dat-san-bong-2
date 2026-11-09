@@ -1,0 +1,56 @@
+﻿@model web_dat_san_bong_2.Models.SanTheThao
+
+@{
+    ViewData["Title"] = "Xác nhận xóa sân";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <div class="card-header bg-danger text-white text-center pt-4 pb-3 rounded-top-4">
+                    <h4 class="fw-bold mb-0">
+                        <i class="bi bi-trash-fill me-2"></i>Bạn có chắc muốn xóa sân này?
+                    </h4>
+                </div>
+
+                <div class="card-body p-4 text-center">
+                    <p class="text-muted mb-4">Hành động này sẽ xóa vĩnh viễn sân khỏi hệ thống. Dữ liệu này không thể khôi phục!</p>
+
+                    <div class="bg-light p-3 rounded-3 text-start mb-4">
+                        <div class="row mb-2">
+                            <div class="col-4 fw-bold text-secondary">Mã sân:</div>
+                            <div class="col-8">#@Model.MaSan</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-4 fw-bold text-secondary">Tên sân:</div>
+                            <div class="col-8 fw-bold text-dark">@Model.TenSan</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-4 fw-bold text-secondary">Loại sân:</div>
+                            <div class="col-8">@Model.LoaiSan</div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-4 fw-bold text-secondary">Trạng thái:</div>
+                            <div class="col-8">
+                                <span class="badge bg-secondary">@Model.TrangThai</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form asp-action="XoaSan" method="post">
+                        <input type="hidden" asp-for="MaSan" />
+
+                        <div class="d-flex gap-2">
+                            <a asp-action="Index" class="btn btn-outline-secondary w-50 py-2 rounded-3">Hủy bỏ</a>
+                            <button type="submit" class="btn btn-danger w-50 py-2 rounded-3 shadow-sm">
+                                <i class="bi bi-trash-fill me-2"></i>Xác nhận xóa
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

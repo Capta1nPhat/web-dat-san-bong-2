@@ -1,0 +1,80 @@
+﻿@model IEnumerable<web_dat_san_bong_2.Models.DonDatSan>
+
+@{
+    ViewData["Title"] = "Lịch sử đặt sân";
+}
+
+<div class="container mt-4">
+    <h2>Lịch sử đặt sân</h2>
+    <hr />
+
+    <div class="card p-3 mb-4">
+        <form method="get" asp-action="LichSuDatSan" class="row g-3">
+            <div class="col-md-3">
+                <label class="form-label">Tìm kiếm (Mã đơn):</label>
+                <input type="text" name="searchString" class="form-control" placeholder="Nhập mã đặt sân..." />
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Từ ngày:</label>
+                <input type="date" name="fromDate" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Đến ngày:</label>
+                <input type="date" name="toDate" class="form-control" />
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>
+            </div>
+        </form>
+    </div>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>Mã đặt sân</th>
+                <th>Ngày đặt</th>
+                <th>Sân</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>DS-@item.MaDatSan</td>
+                        <td>@item.NgayDat.ToString("dd/MM/yyyy")</td>
+                        <td>@(item.MaSanNavigation != null ? item.MaSanNavigation.TenSan : "N/A")</td>
+                        <td>
+                            @if (item.TrangThaiDon == "Hoàn thành")
+                            {
+                                <span class="badge bg-success">@item.TrangThaiDon</span>
+                            }
+                            else if (item.TrangThaiDon == "Đã hủy")
+                            {
+                                <span class="badge bg-danger">@item.TrangThaiDon</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning text-dark">@item.TrangThaiDon</span>
+                            }
+                        </td>
+                        
+                        <td>
+                            <a asp-controller="SanBong"asp-action="Detail"asp-route-id="@item.MaSan" class="btn btn-sm btn-info">Xem chi tiết sân</a>
+                            <a asp-controller="DatSan" asp-action="Create" asp-route-maSan="@item.MaSan" class="btn btn-sm btn-primary">Đặt lại</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-center">Chưa có lịch sử đặt sân nào.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,121 @@
+﻿@model web_dat_san_bong_2.Models.ThanhToan
+
+@{
+    ViewData["Title"] = "Chi tiết thanh toán";
+}
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+
+            <h3>Chi tiết thanh toán</h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table">
+
+                <tr>
+
+                    <th>Mã thanh toán</th>
+
+                    <td>@Model.MaThanhToan</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Sân</th>
+
+                    <td>
+
+                        @Model.MaDatSanNavigation.MaSanNavigation.TenSan
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Ngày chơi</th>
+
+                    <td>
+
+                        @Model.MaDatSanNavigation.NgayChoi
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Giờ</th>
+
+                    <td>
+
+                        @Model.MaDatSanNavigation.GioBatDau
+
+                        -
+
+                        @Model.MaDatSanNavigation.GioKetThuc
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Phương thức</th>
+
+                    <td>@Model.PhuongThuc</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Số tiền</th>
+
+                    <td class="text-danger">
+
+                        @String.Format("{0:N0}", Model.SoTien)
+
+                        VNĐ
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Ngày thanh toán</th>
+
+                    <td>
+
+                        @Model.NgayThanhToan
+
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Trạng thái</th>
+
+                    <td>
+
+                        @Model.TrangThai
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
